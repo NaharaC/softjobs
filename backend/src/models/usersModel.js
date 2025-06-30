@@ -13,7 +13,7 @@ export const createUserModel = async (email, password, rol, lenguage) => {
 
 export const findUserModel = async (email) => {
   const sqlQuery = {
-    text: 'SELECT * FROM usuarios email = $1',
+    text: 'SELECT * FROM usuarios WHERE email = $1',
     values: [email]
   }
   const response = await pool.query(sqlQuery)
