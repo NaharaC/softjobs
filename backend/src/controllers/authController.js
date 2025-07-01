@@ -23,3 +23,22 @@ export const loginUser = async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 }
+
+export const getUser = async (req, res) => {
+  try {
+    const email = req.user
+    const user = await findUserModel(email)
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' })
+    }
+    const filteredUser = {
+      email: user.email,
+      rol: user.rol,
+      lenguage: user.lenguage
+    }
+    res.status(200).json([filteredUser])
+  } catch (error) {
+    res.status(500).json({ message: 'Error al obtener el usuario' })
+  }
+}
